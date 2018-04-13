@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ControleJogosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Acesso">
+    <Key>
+      <PropertyRef Name="ID_LOGIN" />
+    </Key>
+    <Property Name="ID_LOGIN" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SENHA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Amigo">
+    <Key>
+      <PropertyRef Name="AMIGOID" />
+    </Key>
+    <Property Name="AMIGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AmigoJogo" Relationship="Self.FK_AmigoJogo_Amigo" FromRole="Amigo" ToRole="AmigoJogo" />
+  </EntityType>
+  <EntityType Name="AmigoJogo">
+    <Key>
+      <PropertyRef Name="AMIGOJOGOID" />
+    </Key>
+    <Property Name="AMIGOJOGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JOGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" />
+    <Property Name="AMIGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" />
+    <Property Name="DATAEMPRESTIMO" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Amigo" Relationship="Self.FK_AmigoJogo_Amigo" FromRole="AmigoJogo" ToRole="Amigo" />
+    <NavigationProperty Name="Jogo" Relationship="Self.FK_AmigoJogo_Jogo" FromRole="AmigoJogo" ToRole="Jogo" />
+  </EntityType>
+  <EntityType Name="Jogo">
+    <Key>
+      <PropertyRef Name="JOGOID" />
+    </Key>
+    <Property Name="JOGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AmigoJogo" Relationship="Self.FK_AmigoJogo_Jogo" FromRole="Jogo" ToRole="AmigoJogo" />
+  </EntityType>
+  <Association Name="FK_AmigoJogo_Amigo">
+    <End Role="Amigo" Type="Self.Amigo" Multiplicity="1" />
+    <End Role="AmigoJogo" Type="Self.AmigoJogo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Amigo">
+        <PropertyRef Name="AMIGOID" />
+      </Principal>
+      <Dependent Role="AmigoJogo">
+        <PropertyRef Name="AMIGOID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AmigoJogo_Jogo">
+    <End Role="Jogo" Type="Self.Jogo" Multiplicity="1" />
+    <End Role="AmigoJogo" Type="Self.AmigoJogo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jogo">
+        <PropertyRef Name="JOGOID" />
+      </Principal>
+      <Dependent Role="AmigoJogo">
+        <PropertyRef Name="JOGOID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ControleJogosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Acesso" EntityType="Self.Acesso" />
+    <EntitySet Name="Amigo" EntityType="Self.Amigo" />
+    <EntitySet Name="AmigoJogo" EntityType="Self.AmigoJogo" />
+    <EntitySet Name="Jogo" EntityType="Self.Jogo" />
+    <AssociationSet Name="FK_AmigoJogo_Amigo" Association="Self.FK_AmigoJogo_Amigo">
+      <End Role="Amigo" EntitySet="Amigo" />
+      <End Role="AmigoJogo" EntitySet="AmigoJogo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AmigoJogo_Jogo" Association="Self.FK_AmigoJogo_Jogo">
+      <End Role="Jogo" EntitySet="Jogo" />
+      <End Role="AmigoJogo" EntitySet="AmigoJogo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

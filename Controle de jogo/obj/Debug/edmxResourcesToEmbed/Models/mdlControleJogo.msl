@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ControleJogosModelStoreContainer" CdmEntityContainer="ControleJogosEntities">
+    <EntitySetMapping Name="Amigo">
+      <EntityTypeMapping TypeName="ControleJogosModel.Amigo">
+        <MappingFragment StoreEntitySet="Amigo">
+          <ScalarProperty Name="AMIGOID" ColumnName="AMIGOID" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AmigoJogo">
+      <EntityTypeMapping TypeName="ControleJogosModel.AmigoJogo">
+        <MappingFragment StoreEntitySet="AmigoJogo">
+          <ScalarProperty Name="JOGOID" ColumnName="JOGOID" />
+          <ScalarProperty Name="AMIGOID" ColumnName="AMIGOID" />
+          <ScalarProperty Name="DATAEMPRESTIMO" ColumnName="DATAEMPRESTIMO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jogo">
+      <EntityTypeMapping TypeName="ControleJogosModel.Jogo">
+        <MappingFragment StoreEntitySet="Jogo">
+          <ScalarProperty Name="JOGOID" ColumnName="JOGOID" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="ControleJogosModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="USUARIOID" ColumnName="USUARIOID" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+          <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACESSO">
+      <EntityTypeMapping TypeName="ControleJogosModel.ACESSO">
+        <MappingFragment StoreEntitySet="ACESSO">
+          <ScalarProperty Name="SOBRENOME" ColumnName="SOBRENOME" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="PERFIL" ColumnName="PERFIL" />
+          <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
+          <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="ID_LOGIN" ColumnName="ID_LOGIN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

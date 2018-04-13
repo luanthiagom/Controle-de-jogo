@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Controle_de_jogo.Models.Acesso>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastrar acesso</title>
+</head>
+<body>
+    <p>Apenas disponível o cadastro de novos acessos</p> 
+    <p>
+        @Html.ActionLink("Cadastrar acesso", "Create") | 
+        @Html.ActionLink("Realizar login", "Login", "Account")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                <p>Login/E-mail</p>
+            </th>
+            <th>
+                <p>Nome</p>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOME)
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

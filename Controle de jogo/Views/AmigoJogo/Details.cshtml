@@ -1,0 +1,42 @@
+﻿@model Controle_de_jogo.Models.AmigoJogo
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Empréstimo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <p>Data empréstimo</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATAEMPRESTIMO)
+        </dd>
+
+        <dt>
+            <p>Nome amigo</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amigo.NOME)
+        </dd>
+
+        <dt>
+            <p>Nome jogo</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jogo.NOME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.AMIGOJOGOID }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

@@ -1,0 +1,26 @@
+﻿@model Controle_de_jogo.Models.Jogo
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Jogo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <p>Nome jogo</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.JOGOID }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

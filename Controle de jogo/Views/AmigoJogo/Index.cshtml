@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Controle_de_jogo.Models.AmigoJogo>
+
+@{
+    ViewBag.Title = "Empréstimos";
+}
+
+<h2>Empréstimos</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <p>Data de empréstimo</p>
+        </th>
+        <th>
+            <p>Nome amigo</p>
+        </th>
+        <th>
+            <p>Nome jogo</p>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATAEMPRESTIMO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amigo.NOME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jogo.NOME)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.AMIGOJOGOID }) |
+            @Html.ActionLink("Detalhes", "Details", new { id = item.AMIGOJOGOID }) |
+            @Html.ActionLink("Deletar", "Delete", new { id = item.AMIGOJOGOID })
+        </td>
+    </tr>
+}
+
+</table>

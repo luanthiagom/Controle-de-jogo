@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ControleJogosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Acesso">
+          <Key>
+            <PropertyRef Name="ID_LOGIN" />
+          </Key>
+          <Property Name="ID_LOGIN" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SENHA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Amigo">
+          <Key>
+            <PropertyRef Name="AMIGOID" />
+          </Key>
+          <Property Name="AMIGOID" Type="numeric" Precision="13" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AmigoJogo">
+          <Key>
+            <PropertyRef Name="AMIGOJOGOID" />
+          </Key>
+          <Property Name="AMIGOJOGOID" Type="numeric" Precision="13" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JOGOID" Type="numeric" Precision="13" Scale="0" Nullable="false" />
+          <Property Name="AMIGOID" Type="numeric" Precision="13" Scale="0" Nullable="false" />
+          <Property Name="DATAEMPRESTIMO" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jogo">
+          <Key>
+            <PropertyRef Name="JOGOID" />
+          </Key>
+          <Property Name="JOGOID" Type="numeric" Precision="13" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AmigoJogo_Amigo">
+          <End Role="Amigo" Type="Self.Amigo" Multiplicity="1" />
+          <End Role="AmigoJogo" Type="Self.AmigoJogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Amigo">
+              <PropertyRef Name="AMIGOID" />
+            </Principal>
+            <Dependent Role="AmigoJogo">
+              <PropertyRef Name="AMIGOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AmigoJogo_Jogo">
+          <End Role="Jogo" Type="Self.Jogo" Multiplicity="1" />
+          <End Role="AmigoJogo" Type="Self.AmigoJogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jogo">
+              <PropertyRef Name="JOGOID" />
+            </Principal>
+            <Dependent Role="AmigoJogo">
+              <PropertyRef Name="JOGOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ControleJogosModelStoreContainer">
+          <EntitySet Name="Acesso" EntityType="Self.Acesso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Amigo" EntityType="Self.Amigo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AmigoJogo" EntityType="Self.AmigoJogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jogo" EntityType="Self.Jogo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AmigoJogo_Amigo" Association="Self.FK_AmigoJogo_Amigo">
+            <End Role="Amigo" EntitySet="Amigo" />
+            <End Role="AmigoJogo" EntitySet="AmigoJogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AmigoJogo_Jogo" Association="Self.FK_AmigoJogo_Jogo">
+            <End Role="Jogo" EntitySet="Jogo" />
+            <End Role="AmigoJogo" EntitySet="AmigoJogo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ControleJogosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Acesso">
+          <Key>
+            <PropertyRef Name="ID_LOGIN" />
+          </Key>
+          <Property Name="ID_LOGIN" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SENHA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Amigo">
+          <Key>
+            <PropertyRef Name="AMIGOID" />
+          </Key>
+          <Property Name="AMIGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AmigoJogo" Relationship="Self.FK_AmigoJogo_Amigo" FromRole="Amigo" ToRole="AmigoJogo" />
+        </EntityType>
+        <EntityType Name="AmigoJogo">
+          <Key>
+            <PropertyRef Name="AMIGOJOGOID" />
+          </Key>
+          <Property Name="AMIGOJOGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JOGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" />
+          <Property Name="AMIGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" />
+          <Property Name="DATAEMPRESTIMO" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Amigo" Relationship="Self.FK_AmigoJogo_Amigo" FromRole="AmigoJogo" ToRole="Amigo" />
+          <NavigationProperty Name="Jogo" Relationship="Self.FK_AmigoJogo_Jogo" FromRole="AmigoJogo" ToRole="Jogo" />
+        </EntityType>
+        <EntityType Name="Jogo">
+          <Key>
+            <PropertyRef Name="JOGOID" />
+          </Key>
+          <Property Name="JOGOID" Type="Decimal" Precision="13" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AmigoJogo" Relationship="Self.FK_AmigoJogo_Jogo" FromRole="Jogo" ToRole="AmigoJogo" />
+        </EntityType>
+        <Association Name="FK_AmigoJogo_Amigo">
+          <End Role="Amigo" Type="Self.Amigo" Multiplicity="1" />
+          <End Role="AmigoJogo" Type="Self.AmigoJogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Amigo">
+              <PropertyRef Name="AMIGOID" />
+            </Principal>
+            <Dependent Role="AmigoJogo">
+              <PropertyRef Name="AMIGOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AmigoJogo_Jogo">
+          <End Role="Jogo" Type="Self.Jogo" Multiplicity="1" />
+          <End Role="AmigoJogo" Type="Self.AmigoJogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jogo">
+              <PropertyRef Name="JOGOID" />
+            </Principal>
+            <Dependent Role="AmigoJogo">
+              <PropertyRef Name="JOGOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ControleJogosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acesso" EntityType="Self.Acesso" />
+          <EntitySet Name="Amigo" EntityType="Self.Amigo" />
+          <EntitySet Name="AmigoJogo" EntityType="Self.AmigoJogo" />
+          <EntitySet Name="Jogo" EntityType="Self.Jogo" />
+          <AssociationSet Name="FK_AmigoJogo_Amigo" Association="Self.FK_AmigoJogo_Amigo">
+            <End Role="Amigo" EntitySet="Amigo" />
+            <End Role="AmigoJogo" EntitySet="AmigoJogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AmigoJogo_Jogo" Association="Self.FK_AmigoJogo_Jogo">
+            <End Role="Jogo" EntitySet="Jogo" />
+            <End Role="AmigoJogo" EntitySet="AmigoJogo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ControleJogosModelStoreContainer" CdmEntityContainer="ControleJogosEntities">
+          <EntitySetMapping Name="Acesso">
+            <EntityTypeMapping TypeName="ControleJogosModel.Acesso">
+              <MappingFragment StoreEntitySet="Acesso">
+                <ScalarProperty Name="ID_LOGIN" ColumnName="ID_LOGIN" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Amigo">
+            <EntityTypeMapping TypeName="ControleJogosModel.Amigo">
+              <MappingFragment StoreEntitySet="Amigo">
+                <ScalarProperty Name="AMIGOID" ColumnName="AMIGOID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AmigoJogo">
+            <EntityTypeMapping TypeName="ControleJogosModel.AmigoJogo">
+              <MappingFragment StoreEntitySet="AmigoJogo">
+                <ScalarProperty Name="AMIGOJOGOID" ColumnName="AMIGOJOGOID" />
+                <ScalarProperty Name="JOGOID" ColumnName="JOGOID" />
+                <ScalarProperty Name="AMIGOID" ColumnName="AMIGOID" />
+                <ScalarProperty Name="DATAEMPRESTIMO" ColumnName="DATAEMPRESTIMO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jogo">
+            <EntityTypeMapping TypeName="ControleJogosModel.Jogo">
+              <MappingFragment StoreEntitySet="Jogo">
+                <ScalarProperty Name="JOGOID" ColumnName="JOGOID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
